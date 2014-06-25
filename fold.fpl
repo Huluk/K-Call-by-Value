@@ -1,0 +1,12 @@
+def fold(f,acc,li) {
+    if empty(li) then {
+        acc
+    } else {
+        b := f(acc,hd(li));
+        r := tl(li);
+        fold(f, b, r)
+    }
+};
+plus := lambda x,y -> { x+y };
+x := [1,2,3];
+fold(plus,0,x)
