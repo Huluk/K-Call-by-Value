@@ -2,7 +2,9 @@ def fold(f,acc,li) {
     if empty(li) then {
         acc
     } else {
-        fold(f, f(acc,hd(li)), tl(li))
+        b := f(acc,hd(li));
+        r := tl(li);
+        fold(f, b, r)
     }
 };
 

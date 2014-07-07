@@ -130,10 +130,10 @@ module FPL
   // execute TODO why is this necessary? remove
   rule lambda .Ids -> B:Block ( .Vals ) => B
   // execute
-  rule <k> lambda .Ids -> B:Block ( .Vals ) ~> K => B ~> return ... </k>
+  rule <k> (lambda .Ids -> B:Block ( .Vals ) ~> K) => (B ~> return) ... </k>
        <env> Env => GEnv </env>
        <genv> GEnv </genv>
-       <fstack> .=> ListItem((Env,K))... </fstack>
+       <fstack> .=> ListItem((Env,K)) ... </fstack>
 
   // block execution
   rule { Exp } => Exp
@@ -141,23 +141,7 @@ module FPL
   // return
   rule <k> return ~> _ => V ~> K </k>
        <env> _ => Env </env>
-       <fstack> ListItem((Env, K)) => . ... </fstack>
+       <fstack> ListItem((Env, K)) =>. ... </fstack>
        <ans> V </ans>
-
-  // function application
-  /* rule <k> I:Id ( ) => Lambda ... </k> */
-  /*      <env> ... I |-> P ... </env> */
-  /*      <store> ... P |-> Lambda ... </store> */
-
-  /* // TODO when not empty Args, return self */
-  /* syntax K ::= "return" */
-  /* rule <k> lambda ( .Ids , Stmt , LEnv ) => Stmt,return  ... </k> */
-  /*      <env> Env => LEnv </env> */
-  /*      <fstack> ... .=> Env </fstack> */
-
-  // return
-  /* rule <k> return ... </k> */
-  /*      <env> _ => Env </env> */
-  /*      <fstack> ... Env=>. </fstack> */
 
 endmodule
